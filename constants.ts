@@ -11,6 +11,7 @@ export const ASSETS = {
   // Background
   home: `${BASE_URL}home.png`, // New Home Screen
   background: `${BASE_URL}background.png`,
+  bgm: 'https://audio.jukehost.co.uk/Qu6ZtDjpgffcI4wjwVunHKWujeTcpn9y.mp3',
 
   // Environment & Items
   window: `${BASE_URL}wall.png`, 
@@ -22,7 +23,6 @@ export const ASSETS = {
   dagger: `${BASE_URL}dagger.png`,
   broom: `${BASE_URL}broom.png`, // Added Broom
   book: `${BASE_URL}book.png`,   // Added Book
-  bgm: 'https://audio.jukehost.co.uk/Qu6ZtDjpgffcI4wjwVunHKWujeTcpn9y.mp3',
   
   // Characters
   characters: {
