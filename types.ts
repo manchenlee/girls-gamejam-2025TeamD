@@ -1,4 +1,5 @@
 
+
 export enum GamePhase {
   START_SCREEN = 'START_SCREEN',
   INTRO = 'INTRO',
@@ -72,6 +73,8 @@ export interface GameState {
   isTransitioning: boolean; // Controls black screen overlay (Day transition)
   isBlackout: boolean; // Controls narrative black screen (e.g. Day 4 kidnapping)
   endingScript: string[][]; // Changed to array of string arrays (pages)
+  reachedEndingId: string | null; // Tracks which ending has been reached (ending1, ending2, etc.)
+  showEndingUI: boolean; // Controls display of ending title and return button
 }
 
 export interface ScriptNode {

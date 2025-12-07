@@ -25,6 +25,8 @@ const INITIAL_STATE: GameState = {
   isTransitioning: false,
   isBlackout: false,
   endingScript: [],
+  reachedEndingId: null,
+  showEndingUI: false,
 };
 
 export const useGameLogic = () => {
@@ -57,6 +59,11 @@ export const useGameLogic = () => {
   const startGame = () => {
       setState(prev => ({ ...prev, phase: GamePhase.INTRO }));
   };
+
+  const restartGame = () => {
+      setState(INITIAL_STATE);
+      setActiveScriptNode(null);
+  };
   
   // Debug: Directly jump to Ending 3
   const debugTriggerEnding3 = () => {
@@ -64,7 +71,8 @@ export const useGameLogic = () => {
              ...prev, 
              phase: GamePhase.ENDING,
              potionsBrewed: [],
-             endingScript: ENDING_SCRIPTS.ending3
+             endingScript: ENDING_SCRIPTS.ending3,
+             reachedEndingId: 'ending3'
         }));
   };
 
@@ -127,8 +135,18 @@ export const useGameLogic = () => {
       setState(prev => ({ ...prev, phase: GamePhase.TRUE_ENDING_SEQUENCE }));
       setActiveScriptNode(TRUE_ENDING_SCRIPT[0]);
   };
+  
+  const completeEndingSequence = () => {
+      setState(prev => ({ ...prev, showEndingUI: true }));
+  };
 
   const handleChoice = (nextScriptId: string) => {
+    // True Ending Final Transition (Fix for hanging on last choice)
+    if (nextScriptId === 'te_final') {
+        setState(prev => ({ ...prev, showEndingUI: true }));
+        return;
+    }
+
     // Day 1: Love Path
     if (nextScriptId === 'd1_brew_love') {
         setState(prev => ({ 
@@ -186,9 +204,7 @@ export const useGameLogic = () => {
       
       // True Ending Sequence Final Transition
       if (currentId === 'te_final') {
-          // Fade out or restart? 
-          // For now, let's just loop back to home or stay on a fade out
-          setState(prev => ({ ...prev, phase: GamePhase.START_SCREEN })); 
+          setState(prev => ({ ...prev, showEndingUI: true })); 
           return;
       }
       
@@ -411,6 +427,7 @@ export const useGameLogic = () => {
     } else if (state.day === 4) {
         // Day 4 Ending Logic (Priority Order)
         let selectedEndingScript = ENDING_SCRIPTS.ending1; // Default: Ending 1 (Poison/Bad)
+        let endingId = 'ending1';
 
         const hasCat = ingredients.includes('cat');
         const hasFeather = ingredients.includes('feather');
@@ -419,12 +436,16 @@ export const useGameLogic = () => {
 
         if (hasCat) {
              selectedEndingScript = ENDING_SCRIPTS.ending4; // Hidden Ending
+             endingId = 'ending4';
         } else if (hasFeather && hasBroom && hasDagger) {
              selectedEndingScript = ENDING_SCRIPTS.ending3; // True Ending
+             endingId = 'ending3';
         } else if (state.history.day3Result === 'freedom') {
              selectedEndingScript = ENDING_SCRIPTS.ending2; // Escape Ending
+             endingId = 'ending2';
         } else {
              selectedEndingScript = ENDING_SCRIPTS.ending1; // Default
+             endingId = 'ending1';
         }
         
         // Transition directly to Ending Phase (Intro-like black screen)
@@ -436,7 +457,9 @@ export const useGameLogic = () => {
              activeHint: null,
              pendingResult: null,
              nextDayResult: null,
-             endingScript: selectedEndingScript
+             endingScript: selectedEndingScript,
+             reachedEndingId: endingId,
+             showEndingUI: false,
         }));
         
         return; 
@@ -464,6 +487,7 @@ export const useGameLogic = () => {
     activeScriptNode,
     actions: {
         startGame,
+        restartGame,
         startDay,
         advanceDialogue,
         handleChoice,
@@ -473,6 +497,7 @@ export const useGameLogic = () => {
         addLog,
         closeResultModal,
         triggerTrueEndingSequence,
+        completeEndingSequence,
         debugTriggerEnding3
     }
   };

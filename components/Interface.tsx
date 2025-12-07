@@ -1,9 +1,10 @@
 
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Book, Scroll, History, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GameState, ScriptNode } from '../types';
-import { JOURNAL_ENTRIES, HERBS, HINTS, INTRO_SCRIPT, HERB_BOOK_LORE_DAY1, HERB_BOOK_LORE_DAY2, SCRIPTS, RESULT_TITLES, ENDING_SCRIPTS } from '../constants';
+import { JOURNAL_ENTRIES, HERBS, HINTS, INTRO_SCRIPT, HERB_BOOK_LORE_DAY1, HERB_BOOK_LORE_DAY2, SCRIPTS, RESULT_TITLES, ENDING_SCRIPTS, ENDING_TITLES } from '../constants';
 
 interface Props {
   gameState: GameState;
@@ -15,6 +16,8 @@ interface Props {
   onStart: () => void;
   onCloseResult: () => void;
   onStartTrueEnding: () => void; 
+  onCompleteEnding: () => void;
+  onRestart: () => void;
 }
 
 const SafeImage = ({ src, alt, className, ...props }: any) => {
@@ -31,7 +34,7 @@ const SafeImage = ({ src, alt, className, ...props }: any) => {
   );
 };
 
-export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onChoice, onBrew, onClear, onStart, onCloseResult, onStartTrueEnding }) => {
+export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onChoice, onBrew, onClear, onStart, onCloseResult, onStartTrueEnding, onCompleteEnding, onRestart }) => {
   const [showJournal, setShowJournal] = useState(false);
   const [showHerbs, setShowHerbs] = useState(false);
   const [showLogs, setShowLogs] = useState(false);
@@ -109,16 +112,19 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
           return () => clearTimeout(timer);
       } else {
           // Last page reached. 
-          // If this is Ending 3, trigger the True Ending Sequence after the hold time
-          if (gameState.endingScript === ENDING_SCRIPTS.ending3) {
-               const timer = setTimeout(() => {
+          const timer = setTimeout(() => {
+             // If this is Ending 3, trigger the True Ending Sequence
+             if (gameState.endingScript === ENDING_SCRIPTS.ending3) {
                   onStartTrueEnding();
-               }, totalTime);
-               return () => clearTimeout(timer);
-          }
+             } else {
+                 // For Endings 1, 2, 4 -> Show the Return UI
+                 onCompleteEnding();
+             }
+          }, totalTime);
+          return () => clearTimeout(timer);
       }
     }
-  }, [endingPage, gameState.phase, gameState.endingScript, onStartTrueEnding]);
+  }, [endingPage, gameState.phase, gameState.endingScript, onStartTrueEnding, onCompleteEnding]);
 
 
   const handleDialogClick = () => {
@@ -188,6 +194,32 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
                 )}
             </motion.div>
         )}
+      </AnimatePresence>
+      
+      {/* Final Ending UI (Title & Return Button) */}
+      <AnimatePresence>
+         {gameState.showEndingUI && gameState.reachedEndingId && (
+            <motion.div 
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               transition={{ duration: 1.5 }}
+               className="absolute inset-0 z-[200] flex flex-col items-center justify-center pointer-events-auto"
+            >
+                 <h1 className={`text-4xl md:text-6xl font-title tracking-widest mb-12 drop-shadow-2xl ${gameState.reachedEndingId === 'ending3' ? 'text-black border-black' : 'text-[#d4af37] border-[#d4af37]'} border-b-2 pb-4`}>
+                    {ENDING_TITLES[gameState.reachedEndingId]}
+                 </h1>
+                 <button 
+                    onClick={onRestart}
+                    className={`px-8 py-3 border-2 font-serif text-xl tracking-widest uppercase transition-all duration-300 shadow-xl cursor-pointer
+                        ${gameState.reachedEndingId === 'ending3' 
+                           ? 'border-black text-black hover:bg-black hover:text-white' 
+                           : 'border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#0d1b1e]'}
+                    `}
+                 >
+                    Return to Title
+                 </button>
+            </motion.div>
+         )}
       </AnimatePresence>
 
       {/* Pending Result Notification Modal (Morning Report) */}
@@ -322,6 +354,7 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
              )}
 
              <AnimatePresence mode="wait">
+                 {!gameState.showEndingUI && (
                  <motion.div 
                    key={endingPage} // Changing key triggers re-render and animation
                    initial="hidden"
@@ -351,6 +384,7 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
                        </motion.p>
                     ))}
                  </motion.div>
+                 )}
              </AnimatePresence>
           </div>
       )}
@@ -362,7 +396,7 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
       )}
 
       {/* Dialog Box (Standard) */}
-      {activeNode && gameState.phase !== 'BREWING' && gameState.phase !== 'INTRO' && gameState.phase !== 'ENDING' && !gameState.pendingResult && !gameState.isTransitioning && (
+      {activeNode && gameState.phase !== 'BREWING' && gameState.phase !== 'INTRO' && gameState.phase !== 'ENDING' && !gameState.pendingResult && !gameState.isTransitioning && !gameState.showEndingUI && (
         <div className="absolute bottom-4 left-4 right-4 md:left-20 md:right-20 h-64 md:h-72 bg-[#002630]/95 border border-[#d4af37] rounded-lg shadow-2xl z-[50] p-8 flex flex-col cursor-pointer"
              onClick={handleDialogClick}
         >

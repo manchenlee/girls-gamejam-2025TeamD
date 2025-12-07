@@ -1,4 +1,5 @@
 
+
 import { HerbId, CharacterId, Herb, ScriptNode } from './types';
 
 // --- BASE URL ---
@@ -117,6 +118,14 @@ export const INTRO_SCRIPT = [
   "「起霧了。」"
 ];
 
+// --- Ending Titles ---
+export const ENDING_TITLES: Record<string, string> = {
+    ending1: "結局一：無盡的業火",
+    ending2: "結局二：未知的旅程",
+    ending3: "結局三：神之聲",
+    ending4: "結局四：肌肉貓貓神"
+};
+
 // --- Ending Scripts ---
 export const ENDING_SCRIPTS = {
     ending1: [
@@ -233,6 +242,7 @@ export const TRUE_ENDING_SCRIPT: ScriptNode[] = [
     { id: "te_9", speaker: "系統", text: "", choices: [
         { text: "你可以成為任何模樣的女人，你可以做出任何選擇。", next: "te_final" }
     ]},
+    //{ id: "te_final", speaker: "", text: "" }
 ];
 
 
@@ -445,7 +455,7 @@ export const SCRIPTS: Record<string, ScriptNode[]> = {
 
   // --- Day 4 ---
   "day4_start": [
-    { id: "d4_1", speaker: "系統", text: "夜幕低垂，淅淅瀝瀝下起大雨。\n天空如同把怒氣憋在喉頭發出悶悶的雷鳴。" },
+    { id: "d4_1", speaker: "系統", text: "大雨如奏響的輓歌淅淅瀝瀝落下。\n晦暗的天空發出如同把怒氣憋在喉頭的雷鳴。" },
     { id: "d4_2", speaker: "黑貓", text: "喵喵──" },
     { id: "d4_3", speaker: "系統", text: "彷彿要應驗你心底不安的預感，外頭響起敲門聲。" },
     { id: "d4_4", speaker: "系統", text: "你還沒來得及應門\n就被衝進來的壯碩男人架住身子扛出屋外。" },
