@@ -237,7 +237,7 @@ export const GameScene: React.FC<Props> = ({ gameState, onHerbDragStart, onPotDr
       </div>
 
       {/* Herbs Display (No Shelf) (Z-25) */}
-      <div className="absolute left-4 top-20 bottom-32 w-48 md:w-64 flex flex-col items-center z-25">
+      <div className="absolute left-9 top-20 bottom-32 w-80 md:w-[32rem] flex flex-col items-center z-25">
           <div className="grid grid-cols-2 gap-4 h-full content-start w-full">
             {DISPLAY_HERBS.map((herb, index) => (
               <div 
@@ -249,7 +249,10 @@ export const GameScene: React.FC<Props> = ({ gameState, onHerbDragStart, onPotDr
                 onMouseLeave={handleMouseLeave}
                 className={`relative group cursor-pointer hover:scale-105 transition-transform
                    ${index === 0 ? 'col-span-2 row-span-2 aspect-[2/1]' : 'aspect-square'} 
-                `}
+                `
+                
+                }
+                style={{ top: `${herb.offsetY}%`, left: `${herb.offsetX}%`, width: '4rem', height: '4rem' }}
               >
                 <SafeImage src={herb.image} className="w-full h-full object-contain drop-shadow-md" alt={herb.name} fallbackColor="2e7d32" />
               </div>
@@ -275,7 +278,7 @@ export const GameScene: React.FC<Props> = ({ gameState, onHerbDragStart, onPotDr
         onMouseEnter={() => handleMouseEnter(DESCRIPTIONS.cat)}
         onMouseLeave={handleMouseLeave}
       >
-        <SafeImage src={ASSETS.characters[CharacterId.CAT]} className="w-full opacity-90" alt="Cat" fallbackColor="000000" />
+        <SafeImage src={ASSETS.characters[CharacterId.CAT]} className="w-full opacity-100" alt="Cat" fallbackColor="000000" />
       </div>
 
       {/* Cauldron (Z-40) */}

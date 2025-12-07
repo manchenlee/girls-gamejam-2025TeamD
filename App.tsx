@@ -65,7 +65,7 @@ const App: React.FC = () => {
   return (
     <div className="w-screen h-screen relative bg-black overflow-hidden">
       {/* Background Music - 確保這一行始終被渲染，ref 才能抓到元素 */}
-      <audio ref={audioRef} src={ASSETS.bgm} loop />
+      <audio ref={audioRef} src={ASSETS.bgm1} loop />
 
       {state.phase === 'START_SCREEN' ? (
          <HomeScene 

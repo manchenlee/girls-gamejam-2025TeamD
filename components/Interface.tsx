@@ -257,7 +257,7 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
       {/* Ghostly Inner Voice / Hints (Top Overlay) */}
       {hintText && shouldShowHints && !gameState.pendingResult && (
         <div className="absolute top-4 left-0 right-0 z-[50] flex justify-center pointer-events-none">
-          <p className="text-[#d4af37] italic font-serif text-lg md:text-xl max-w-xl text-center px-6 py-2 drop-shadow-[0_0_8px_rgba(212,175,55,0.8)] animate-pulse">
+          <p className="text-[#d4af37] italic font-serif text-lg md:text-xl max-w-xl text-center px-6 py-2 drop-shadow-[0_0_8px_rgba(212,175,55,0.8)] animate-pulse whitespace-pre-line">
             {hintText}
           </p>
         </div>

@@ -36,6 +36,8 @@ export interface Herb {
   name: string;
   description: string;
   image: string;
+  offsetX?: number;
+  offsetY?: number;
 }
 
 export interface LogEntry {

@@ -8,10 +8,12 @@ const BASE_URL = 'https://raw.githubusercontent.com/Sinciya/GirlsGameJamTeamD/ma
 
 // --- ASSETS ---
 export const ASSETS = {
-  // Background
+  // Background bgm2 -> bgm1 -> bgm 2 (start, day4)
   home: `${BASE_URL}home.png`, // New Home Screen
   background: `${BASE_URL}background.png`,
-  bgm: 'https://audio.jukehost.co.uk/Qu6ZtDjpgffcI4wjwVunHKWujeTcpn9y.mp3',
+  bgm1: 'https://audio.jukehost.co.uk/Qu6ZtDjpgffcI4wjwVunHKWujeTcpn9y.mp3',
+  bgm2: 'https://audio.jukehost.co.uk/mJDEf8vQ2z1gxfueyphoVEF1haO53haq.mp3',
+  
 
   // Environment & Items
   window: `${BASE_URL}wall.png`, 
@@ -51,14 +53,14 @@ export const ASSETS = {
 
 // --- Herbs Data ---
 export const HERBS: Herb[] = [
-  { id: HerbId.CHAMOMILE, name: '甘菊', description: '越被踐踏則越茁壯，多麽謙卑？盎格魯人出版的藥草書《治療》中所列出的九種神奇草藥中排名第五，能夠提振能量。', image: ASSETS.herbs[HerbId.CHAMOMILE] },
-  { id: HerbId.ACONITE, name: '烏頭', description: '雖然含有劇毒，卻可以製成解毒劑與麻醉藥。', image: ASSETS.herbs[HerbId.ACONITE] },
-  { id: HerbId.ALOE, name: '蘆薈', description: '塗抹在傷處能夠舒緩傷勢，服用則會導致腹瀉。', image: ASSETS.herbs[HerbId.ALOE] },
-  { id: HerbId.ERYNGIUM, name: '濱刺芹', description: '保濕護膚，服用會⋯⋯', image: ASSETS.herbs[HerbId.ERYNGIUM] },
-  { id: HerbId.HEMLOCK, name: '毒芹', description: '雖然因為某位希臘哲人的死而聲名遠播，但在低劑量時，其實具有鎮靜與解毒的效用。', image: ASSETS.herbs[HerbId.HEMLOCK] },
-  { id: HerbId.MANDRAKE, name: '曼德拉草', description: '根部形似人形。傳說拔出時會發出致命的尖叫。', image: ASSETS.herbs[HerbId.MANDRAKE] },
-  { id: HerbId.VALERIAN, name: '纈草', description: '強效鎮靜劑，能帶來無夢的深沉睡眠。', image: ASSETS.herbs[HerbId.VALERIAN] },
-  { id: HerbId.SAGE, name: '鼠尾草', description: '古老的淨化草藥，能驅逐邪惡與病氣。', image: ASSETS.herbs[HerbId.SAGE] },
+  { id: HerbId.CHAMOMILE, name: '甘菊', description: '越被踐踏則越茁壯，多麽謙卑？盎格魯人出版的藥草書《治療》中所列出的九種神奇草藥中排名第五，能夠提振能量。', image: ASSETS.herbs[HerbId.CHAMOMILE],offsetX: 25, offsetY: 28 },
+  { id: HerbId.ACONITE, name: '烏頭', description: '雖然含有劇毒，卻可以製成解毒劑與麻醉藥。', image: ASSETS.herbs[HerbId.ACONITE],offsetX: 39, offsetY: 65 },
+  { id: HerbId.ALOE, name: '蘆薈', description: '塗抹在傷處能夠舒緩傷勢，服用則會導致腹瀉。', image: ASSETS.herbs[HerbId.ALOE],offsetX: 11, offsetY: 40 },
+  { id: HerbId.ERYNGIUM, name: '濱刺芹', description: '保濕護膚，服用會......', image: ASSETS.herbs[HerbId.ERYNGIUM],offsetX: 89, offsetY: 74 },
+  { id: HerbId.HEMLOCK, name: '毒芹', description: '雖然因為某位希臘哲人的死而聲名遠播，但在低劑量時，其實具有鎮靜與解毒的效用。', image: ASSETS.herbs[HerbId.HEMLOCK] ,offsetX: 57, offsetY: 56},
+  { id: HerbId.MANDRAKE, name: '曼德拉草', description: '根部形似人形。傳說拔出時會發出致命的尖叫。', image: ASSETS.herbs[HerbId.MANDRAKE],offsetX: 92, offsetY: 26 },
+  { id: HerbId.VALERIAN, name: '纈草', description: '強效鎮靜劑，能帶來無夢的深沉睡眠。', image: ASSETS.herbs[HerbId.VALERIAN],offsetX: 15, offsetY: 53 },
+  { id: HerbId.SAGE, name: '鼠尾草', description: '古老的淨化草藥，能驅逐邪惡與病氣。', image: ASSETS.herbs[HerbId.SAGE] ,offsetX: 75, offsetY: 36},
 ];
 
 // --- Herb Book Lore ---
@@ -250,7 +252,7 @@ export const TRUE_ENDING_SCRIPT: ScriptNode[] = [
 
 
 // --- Hints Variables ---
-export const DAY1_HINT_LOVE = "悉聽尊便，照客人說的試試看甘菊和濱刺芹的組合吧。";
+export const DAY1_HINT_LOVE = "悉聽尊便，照客人說的試試看甘菊和濱刺芹的組合吧。\n拖曳藥草到鍋釜裡。";
 export const DAY1_HINT_FAIL = "該替他好好清理那一肚子壞水了。";
 export const DAY2_HINT_HEAL = "使用那兩個能滋潤肌膚又屬於同色系的兩種藥材吧。\n之前拿來泡茶的那個材料也不錯。"; /* 提示：蘆薈、濱刺芹（或加甘菊）。*/
 export const DAY2_HINT_POISON = "使用那兩個充滿毒性又是對比色的兩種藥材吧。"; /* 提示：烏頭、毒芹（只使用其中一項將使藥效削弱）。 */
