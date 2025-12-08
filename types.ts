@@ -1,6 +1,7 @@
 
 
 export enum GamePhase {
+  QUOTE_SCREEN = 'QUOTE_SCREEN', // Added Quote Screen
   START_SCREEN = 'START_SCREEN',
   INTRO = 'INTRO',
   MORNING = 'MORNING', // Weather check
@@ -79,6 +80,7 @@ export interface GameState {
   endingScript: string[][]; // Changed to array of string arrays (pages)
   reachedEndingId: string | null; // Tracks which ending has been reached (ending1, ending2, etc.)
   showEndingUI: boolean; // Controls display of ending title and return button
+  tutorialStep: number; // 0 = none, 1 = drag, 2 = herb book, 3 = journal
 }
 
 export interface ScriptNode {

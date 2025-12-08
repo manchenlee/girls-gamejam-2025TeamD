@@ -17,6 +17,7 @@ interface Props {
   onCompleteEnding: () => void;
   onRestart: () => void;
   onWakeUp: () => void; // New prop for manually ending transition
+  onAdvanceTutorial: () => void;
 }
 
 const SafeImage = ({ src, alt, className, ...props }: any) => {
@@ -33,7 +34,7 @@ const SafeImage = ({ src, alt, className, ...props }: any) => {
   );
 };
 
-export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onChoice, onBrew, onClear, onStart, onCloseResult, onStartTrueEnding, onCompleteEnding, onRestart, onWakeUp }) => {
+export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onChoice, onBrew, onClear, onStart, onCloseResult, onStartTrueEnding, onCompleteEnding, onRestart, onWakeUp, onAdvanceTutorial }) => {
   const [showJournal, setShowJournal] = useState(false);
   const [showHerbs, setShowHerbs] = useState(false);
   const [showLogs, setShowLogs] = useState(false);
@@ -97,9 +98,9 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
       if (!currentScriptPage) return;
 
       const isFirstPage = endingPage === 0;
-      const exitBuffer = isFirstPage ? 0 : 1000; 
-      const animationTime = currentScriptPage.length * 2000; 
-      const holdTime = 2000;
+      const exitBuffer = isFirstPage ? 0 : 1500; 
+      const animationTime = currentScriptPage.length * 1500; 
+      const holdTime = 1500;
 
       const totalTime = exitBuffer + animationTime + holdTime;
 
@@ -144,11 +145,13 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
   const handleOpenHerbs = () => {
       setShowHerbs(true);
       setHasOpenedHerbs(true);
+      if (gameState.tutorialStep === 2) onAdvanceTutorial();
   };
 
   const handleOpenJournal = () => {
       setShowJournal(true);
       setViewedJournalLength(gameState.unlockedJournal.length);
+      if (gameState.tutorialStep === 3) onAdvanceTutorial();
   };
   
   const handleIntroStart = () => {
@@ -212,6 +215,51 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
                 )}
             </motion.div>
         )}
+      </AnimatePresence>
+      
+      {/* Tutorial Modals */}
+      <AnimatePresence>
+          {gameState.tutorialStep === 1 && (
+             <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="absolute bottom-40 left-1/2 -translate-x-1/2 z-[70] bg-[#1a2f33] border border-[#d4af37] text-[#e2d2a4] p-4 rounded-lg shadow-xl cursor-pointer flex flex-col items-center gap-2 max-w-sm text-center"
+                onClick={onAdvanceTutorial}
+             >
+                <p className="font-serif text-lg">根據各藥草的功能，<br/>將需要的藥草拖入鍋釜中。</p>
+                <span className="text-xs text-[#d4af37] opacity-70 border-t border-[#d4af37]/30 pt-1 w-full">(點擊繼續)</span>
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#1a2f33] border-b border-r border-[#d4af37] transform rotate-45"></div>
+             </motion.div>
+          )}
+
+          {gameState.tutorialStep === 2 && (
+             <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+                className="absolute top-20 right-4 z-[70] bg-[#1a2f33] border border-[#d4af37] text-[#e2d2a4] p-4 rounded-lg shadow-xl cursor-pointer flex flex-col items-center gap-2 max-w-xs text-center"
+                onClick={onAdvanceTutorial}
+             >
+                <div className="absolute -top-2 right-4 w-4 h-4 bg-[#1a2f33] border-t border-l border-[#d4af37] transform rotate-45"></div>
+                <p className="font-serif text-lg">點擊藥草誌取得藥草知識。</p>
+                <span className="text-xs text-[#d4af37] opacity-70 border-t border-[#d4af37]/30 pt-1 w-full">(點擊繼續)</span>
+             </motion.div>
+          )}
+
+          {gameState.tutorialStep === 3 && (
+             <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+                className="absolute top-20 right-20 z-[70] bg-[#1a2f33] border border-[#d4af37] text-[#e2d2a4] p-4 rounded-lg shadow-xl cursor-pointer flex flex-col items-center gap-2 max-w-xs text-center"
+                onClick={onAdvanceTutorial}
+             >
+                <div className="absolute -top-2 right-4 w-4 h-4 bg-[#1a2f33] border-t border-l border-[#d4af37] transform rotate-45"></div>
+                <p className="font-serif text-lg">亦可點擊日記閱讀。</p>
+                <span className="text-xs text-[#d4af37] opacity-70 border-t border-[#d4af37]/30 pt-1 w-full">(點擊繼續)</span>
+             </motion.div>
+          )}
       </AnimatePresence>
       
       {/* Final Ending UI (Title & Return Button) */}
@@ -314,7 +362,7 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
           <motion.div 
             initial={{ opacity: 1 }}
             animate={{ opacity: isIntroExiting ? 0 : 1 }}
-            transition={{ duration: 2 }}
+            transition={{ duration: 1.5 }}
             className="absolute inset-0 bg-black z-[100] flex flex-col justify-center items-center text-[#e2d2a4] font-serif p-10 text-center select-none"
           >
              <motion.div 
@@ -513,18 +561,6 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
                           </>
                       )}
                   </p>
-                  
-                    {/*<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {HERBS.map(herb => (
-                            <div key={herb.id} className="flex gap-4 items-start border border-[#d4af37]/20 p-4 rounded bg-[#0d1b1e]/50 hover:bg-[#0d1b1e] transition-colors">
-                                <SafeImage src={herb.image} className="w-20 h-20 object-contain shrink-0" alt={herb.name} fallbackColor="2e7d32" />
-                                <div>
-                                    <h3 className="text-[#d4af37] font-bold text-xl mb-1">{herb.name}</h3>
-                                    <p className="text-lg text-gray-300 leading-snug">{herb.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>*/}
               </div>
           </div>
       )}

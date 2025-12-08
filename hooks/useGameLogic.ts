@@ -1,10 +1,11 @@
+
 import { useState, useEffect, useCallback } from 'react';
 import { GameState, GamePhase, CharacterId, HerbId, ScriptNode, LogEntry } from '../types';
 import { INTRO_SCRIPT, SCRIPTS, HERBS, DAY2_HINT_HEAL, DAY2_HINT_POISON, DAY1_HINT_LOVE, DAY1_HINT_FAIL, DAY3_HINT_FAKE, DAY3_HINT_POISON, DAY4_HINT, DAY4_HINT_ED3, DAY4_HINT_ED3NOT, ENDING_SCRIPTS, TRUE_ENDING_SCRIPT } from '../constants';
 
 const INITIAL_STATE: GameState = {
   day: 0,
-  phase: GamePhase.START_SCREEN, // Updated Initial Phase
+  phase: GamePhase.QUOTE_SCREEN, // Updated Initial Phase to Quote
   currentGuest: null,
   potionsBrewed: [],
   history: {
@@ -27,6 +28,7 @@ const INITIAL_STATE: GameState = {
   endingScript: [],
   reachedEndingId: null,
   showEndingUI: false,
+  tutorialStep: 0,
 };
 
 export const useGameLogic = () => {
@@ -55,13 +57,20 @@ export const useGameLogic = () => {
       logs: [...prev.logs, { speaker, text }]
     }));
   };
+  
+  const dismissQuote = () => {
+      setState(prev => ({ ...prev, phase: GamePhase.START_SCREEN }));
+  };
 
   const startGame = () => {
       setState(prev => ({ ...prev, phase: GamePhase.INTRO }));
   };
 
   const restartGame = () => {
-      setState(INITIAL_STATE);
+      setState({
+          ...INITIAL_STATE,
+          phase: GamePhase.START_SCREEN
+      });
       setActiveScriptNode(null);
   };
   
@@ -148,6 +157,13 @@ export const useGameLogic = () => {
   const completeEndingSequence = () => {
       setState(prev => ({ ...prev, showEndingUI: true }));
   };
+  
+  const advanceTutorial = () => {
+      setState(prev => ({ 
+          ...prev, 
+          tutorialStep: prev.tutorialStep >= 3 ? 0 : prev.tutorialStep + 1 
+      }));
+  };
 
   const handleChoice = (nextScriptId: string) => {
     // True Ending Final Transition (Fix for hanging on last choice)
@@ -161,7 +177,8 @@ export const useGameLogic = () => {
         setState(prev => ({ 
             ...prev, 
             phase: GamePhase.BREWING,
-            activeHint: DAY1_HINT_LOVE
+            activeHint: DAY1_HINT_LOVE,
+            tutorialStep: 1 // Start Tutorial
         }));
         setActiveScriptNode(null);
         return;
@@ -171,7 +188,8 @@ export const useGameLogic = () => {
         setState(prev => ({ 
             ...prev, 
             phase: GamePhase.BREWING,
-            activeHint: DAY1_HINT_FAIL
+            activeHint: DAY1_HINT_FAIL,
+            tutorialStep: 1 // Start Tutorial
         }));
         setActiveScriptNode(null);
         return;
@@ -492,6 +510,7 @@ export const useGameLogic = () => {
     currentScript,
     activeScriptNode,
     actions: {
+        dismissQuote, // Export new action
         startGame,
         restartGame,
         startDay,
@@ -505,7 +524,8 @@ export const useGameLogic = () => {
         triggerTrueEndingSequence,
         completeEndingSequence,
         debugTriggerEnding3,
-        wakeUp // Export the new action
+        wakeUp, 
+        advanceTutorial
     }
   };
 };

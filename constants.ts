@@ -13,6 +13,8 @@ export const ASSETS = {
   background: `${BASE_URL}background.png`,
   bgm1: 'https://audio.jukehost.co.uk/Qu6ZtDjpgffcI4wjwVunHKWujeTcpn9y.mp3',
   bgm2: 'https://audio.jukehost.co.uk/mJDEf8vQ2z1gxfueyphoVEF1haO53haq.mp3',
+  bgm3: 'https://audio.jukehost.co.uk/0qYWIeGjC7or5rVjBOrtoD3LN10YvqHi.mp3',
+  bgm4: 'https://audio.jukehost.co.uk/h8PQRM2kg01xCSzsfVRHL5zhrwgGaGI6.mp3',
   
 
   // Environment & Items
@@ -65,9 +67,9 @@ export const HERBS: Herb[] = [
 ];
 
 // --- Herb Book Lore ---
-export const HERB_BOOK_LORE_DAY1 = "少量的烏頭和毒芹能造成麻醉與鎮靜的效果。\n（旁邊有著一小行筆記：意即不超過一份。烏頭與毒芹一起使用則不需要加其他的東西——容易藥性衝突）";
-export const HERB_BOOK_LORE_DAY2 = "⋯⋯麥稈石竹的存在即是腐敗，這種草一但長在藥草之間，種植者就必須花很多力氣將它拔除，因此麥稈石竹曾出現在奧菲莉亞的瘋言瘋語中⋯⋯";
-export const HERB_BOOK_LORE_DAY3 = "……無花果與濱刺芹根都是城市中盛行的「助興」食物，人們相信吃下這些東西會使死去的激情重燃，貧瘠的土壤潤澤……";
+export const HERB_BOOK_LORE_DAY2 = "少量的烏頭和毒芹能造成麻醉與鎮靜的效果。\n（旁邊有著一小行筆記：意即不超過一份。烏頭與毒芹一起使用則不需要加其他的東西——容易藥性衝突）";
+export const HERB_BOOK_LORE_DAY3 = "⋯⋯麥稈石竹的存在即是腐敗，這種草一但長在藥草之間，種植者就必須花很多力氣將它拔除，因此麥稈石竹曾出現在奧菲莉亞的瘋言瘋語中⋯⋯";
+export const HERB_BOOK_LORE_DAY1 = "⋯⋯無花果與濱刺芹根都是城市中盛行的「助興」食物，人們相信吃下這些東西會使死去的激情重燃，貧瘠的土壤潤澤⋯⋯";
 // --- Journal Entries ---
 export const JOURNAL_ENTRIES = [
   // Day 1 (Index 0)
@@ -75,7 +77,8 @@ export const JOURNAL_ENTRIES = [
   // Day 2 (Index 1)
   "沒有停止。\n\n腦海裡的聲音沒有停止。",
   // Day 3 (Index 2)
-  "我不明白莎夏的字條是什麼意思，什麼叫伊娃和艾瑪大嬸永遠不會來了？\n\n（下半頁被撕去了）"
+  "我不明白莎夏的字條是什麼意思，什麼叫伊娃和艾瑪大嬸永遠不會來了？\n\n（下半頁被撕去了）",
+  "那些使人疼痛的是否使人變得更強大？\n捱過那些鋒利的是否會成為最堅硬的？\n陌生人的哭聲會在靈魂之間共振嗎？",
 ];
 
 // --- Item Descriptions Data ---
@@ -83,18 +86,20 @@ export const DESCRIPTIONS = {
   mirror: {
     day1: "鏡子：\n鏡中是你。\n雜亂的紅髮，蜂蜜色的眸。",
     day2: "鏡子：\n鏡中是你̴̢̕。\n雜亂的紅̶̯͍͚͇͓̑̄͗̑͢͠髮҈̛͔̳̳͇̋́̌̒͢，蜂蜜色的眸。",
-    day3: "鏡子：\n鏡中是你。\n鏡中是你。\n鏡҈̧̛̬͋中҈̢͓̭̊͝只҉̨̰̞͖̇͑͞是҈̡̛̳͒̋̆你̸̡͇͇̬̍̃͡？̷̪̋̈̕͢",
+    day3: "鏡子：\n鏡中是你。\n鏡中是你。\n鏡中只是你。",
     day4: "鏡子：\n那些我與我以外的。"
   },
   cat: {
     day1: "黑貓：\n黛安娜女士生前非常寵愛這隻貓。\n這隻烏黑的貓沒有名字，就像媽——黛安娜女士從來沒有給你一個名字一樣。\n你想，也許你可以為自己取一個名字。",
     day2: "黑貓：\n牠如此靜定地看著你，彷彿是這變動世界中唯一的不變。\n如同生活的錨點。\n明天又會發生什麼事呢？",
     day3: "黑貓：\n牠眼中的世界也是如此令人發笑嗎？",
-    day4: "" // No description for Day 4 Cat
+    day4: "黑貓：\n⋯⋯" 
   },
   exit: {
     day1: "窗：\n沿著黑刺李小徑一直走，能在兩聲鐘響之間抵達小鎮。\n此刻外頭被濃霧包圍，這樣的日子已經持續了好一陣子了。",
-    day2: "窗：\n沿著黑刺李小徑一直走，能在兩聲鐘響之間抵達小鎮。\n今天的霧似乎沒有那麼濃，要出去採集看看嗎？"
+    day2: "窗：\n沿著黑刺李小徑一直走，能在兩聲鐘響之間抵達小鎮。\n什麼都看不清楚。",
+    day3: "窗：\n沿著黑刺李小徑一直走，能在兩聲鐘響之間抵達小鎮。\n如今出去有意義嗎？",
+    day4: "窗：\n已經逃不掉了。"
   },
   cauldron: "鍋釜：\n黛安娜女士留給你的大鍋釜。\n「不用太相信書上寫的，」她總說：「相信感覺與實踐。」",
   axe: "鍋釜：\n黛安娜女士留給你的大鍋釜。「不用太相信書上寫的，」她總說：「相信感覺與實踐。」", 
@@ -235,19 +240,21 @@ export const ENDING_SCRIPTS = {
 export const TRUE_ENDING_SCRIPT: ScriptNode[] = [
     { id: "te_1", speaker: "系統", text: "「喔，腦裡的聲音，神啊！\n我總算遇見你了。」" },
     { id: "te_2", speaker: "系統", text: "「請您告訴我，我該怎麼做？\n現在的苦難是您給我的試煉嗎？」" },
-    { id: "te_3", speaker: "系統", text: "「啊，我好想逃跑。\n請您指點我面對這場苦難的方法吧。」", choices: [
-        { text: "我沒辦法直接告訴你該怎麼做。", next: "te_4" }
+    { id: "te_3", speaker: "系統", text: "「為什麼事情會變成這樣？\n為什麼人們會變成這樣？" },
+    { id: "te_4", speaker: "系統", text: "「想要甜蜜的愛卻被迫得愛，想要溫暖的家庭卻被迫成全，\n想要自由卻受他人束縛。\n即使失去熟悉的一切，即使逃到森林深處，依然會被審判⋯⋯" },
+    { id: "te_5", speaker: "系統", text: "「為什麼逃不出去呢？\n神啊，請您指點我面對這場苦難的方法吧。」", choices: [
+        { text: "我沒辦法直接告訴你該怎麼做。", next: "te_6" }
     ]},
-    { id: "te_4", speaker: "系統", text: "「⋯⋯為什麼？\n明明經你指點，我才調配出正確的草藥，\n現在卻不肯為我解圍⋯⋯」" },
-    { id: "te_5", speaker: "系統", text: "「媽媽從小指導我，一步步告訴我可以怎麼做，怎樣才是對的。\n我才能一路走到現在。\n難道萬能的神就做不到嗎？」", choices: [
-        { text: "對不起，但這不是我的作風。", next: "te_6" },
+    { id: "te_6", speaker: "系統", text: "「⋯⋯為什麼？\n明明經你指點，我才調配出正確的草藥，\n現在卻不肯為我解圍⋯⋯」" },
+    { id: "te_7", speaker: "系統", text: "「黛安娜女士從小指導我，一步步告訴我可以怎麼做，怎樣才是對的。\n我才能一路走到現在。\n難道萬能的神就做不到嗎？」", choices: [
+        { text: "對不起，但這不是我的作風。", next: "te_8" },
     ]},
-    { id: "te_6", speaker: "系統", text: "", choices: [
-        { text: "為表歉意，請讓我分享一件在這個時代還鮮為人知的事情。", next: "te_7" }
+    { id: "te_8", speaker: "系統", text: "", choices: [
+        { text: "為表歉意，請讓我分享一件在這個時代還鮮為人知的事情。", next: "te_9" }
     ]},
-    { id: "te_7", speaker: "系統", text: "「⋯⋯」" },
-    { id: "te_8", speaker: "系統", text: "「你想說什麼？」" },
-    { id: "te_9", speaker: "系統", text: "", choices: [
+    { id: "te_9", speaker: "系統", text: "「⋯⋯」" },
+    { id: "te_10", speaker: "系統", text: "「你想說什麼？」" },
+    { id: "te_11", speaker: "系統", text: "", choices: [
         { text: "你可以成為任何模樣的女人，你可以做出任何選擇。", next: "te_final" }
     ]},
     //{ id: "te_final", speaker: "", text: "" }
@@ -255,7 +262,7 @@ export const TRUE_ENDING_SCRIPT: ScriptNode[] = [
 
 
 // --- Hints Variables ---
-export const DAY1_HINT_LOVE = "悉聽尊便，照客人說的試試看甘菊和濱刺芹的組合吧。\n拖曳藥草到鍋釜裡。";
+export const DAY1_HINT_LOVE = "悉聽尊便，照客人說的試試看甘菊和濱刺芹的組合吧。";
 export const DAY1_HINT_FAIL = "該替他好好清理那一肚子壞水了。";
 export const DAY2_HINT_HEAL = "使用那兩個能滋潤肌膚又屬於同色系的兩種藥材吧。\n之前拿來泡茶的那個材料也不錯。"; /* 提示：蘆薈、濱刺芹（或加甘菊）。*/
 export const DAY2_HINT_POISON = "使用那兩個充滿毒性又是對比色的兩種藥材吧。"; /* 提示：烏頭、毒芹（只使用其中一項將使藥效削弱）。 */
@@ -396,15 +403,14 @@ export const SCRIPTS: Record<string, ScriptNode[]> = {
       { id: "d2_r_end2", speaker: "系統", text: "抬頭望向沈甸甸的灰色天空，這穹頂之下，還有多少這樣的事？" }
   ],
   "day2_result_heal": [
-      { id: "d2_rh1", speaker: "系統", text: "清晨的空氣比以往清新了一些。" },
-      { id: "d2_rh2", speaker: "系統", text: "你聽說村裡有個婦人帶著孩子離開了，沒有人知道她去了哪裡。" },
-      { id: "d2_rh3", speaker: "系統", text: "早晨拔了幾株藥園中蔓生的芸香，" },
-{ id: "d2_rh4", speaker: "系統", text: "意外地在角落看見了好久沒用的樺樹枝掃帚。" },
-{ id: "d2_rh5", speaker: "系統", text: "你將它帶回屋內。" },
+      { id: "d2_rh1", speaker: "系統", text: "你聽說那婦人帶著孩子離開了，沒有人知道她去了哪裡。" },
+      { id: "d2_rh2", speaker: "系統", text: "早晨拔了幾株藥園中蔓生的芸香，" },
+{ id: "d2_rh3", speaker: "系統", text: "意外地在角落看見了好久沒用的樺樹枝掃帚。" },
+{ id: "d2_rh4", speaker: "系統", text: "你將它帶回屋內。" },
   ],
 "day2_result_heal_fail": [
       { id: "d2_rhf1", speaker: "系統", text: "一切如舊。" },
-      { id: "d2_rhf2", speaker: "系統", text: "你瞥見窗外有女人一閃而過，如泣如訴。" },
+      { id: "d2_rhf2", speaker: "系統", text: "你依稀瞥見窗外有女人一閃而過，如泣如訴。" },
   ],
   "day2_result_poison": [
       { id: "d2_rp1", speaker: "系統", text: "村裡的鐘聲敲得很急。" },
@@ -413,20 +419,19 @@ export const SCRIPTS: Record<string, ScriptNode[]> = {
   ],
   "day2_result_fail": [
       { id: "d2_rf1", speaker: "系統", text: "一切如舊。" },
-      { id: "d2_rf2", speaker: "系統", text: "那個婦人再也沒有出現過。" },
-      { id: "d2_rf3", speaker: "系統", text: "有些傷痕是藥石罔效的。" }
+      { id: "d2_rf2", speaker: "系統", text: "你依稀聽見風所帶來的哭嚎聲，是錯覺吧。" },
+      { id: "d2_rf3", speaker: "系統", text: "你再也沒聽說那個婦人的消息。" }
   ], 
 
 
 
   // --- Day 3 ---
   "day3_start": [
-    { id: "d2_1", speaker: "系統", text: "那個遙遠的聲音又在腦中迴響。\n你緩緩意識到聲音在調製藥草時尤其清晰。" },
+    { id: "d3_1", speaker: "系統", text: "那個遙遠的聲音又在腦中迴響。\n你緩緩意識到聲音在調製藥草時尤其清晰。\n你覺得自己快瘋了。" },
     { id: "d3_2", speaker: "系統", text: "今天的天空是黑色的。沒有星光。\n你覺得像一隻已經屍僵的黑色貓咪。" },
     { id: "d3_3", speaker: "黑貓", text: "喵——" },
     { id: "d3_4", speaker: "系統", text: "聽見清脆的敲窗聲，外頭站著一個少女。" },
   ],
-  // 這裡要補少女敲窗戶的說明
   "day3_guest": [
     { id: "d3_g1", speaker: "系統", text: "寒風凍紅她的雙頰，灰霧則襯得她的雙眼分外清亮。" },
     { id: "d3_g2", speaker: "少女", text: "我需要一帖假死藥。" },
