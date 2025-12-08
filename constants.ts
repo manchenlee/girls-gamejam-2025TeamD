@@ -56,7 +56,7 @@ export const ASSETS = {
 
 // --- Herbs Data ---
 export const HERBS: Herb[] = [
-  { id: HerbId.CHAMOMILE, name: '甘菊', description: '越被踐踏則越茁壯，多麽謙卑？盎格魯人出版的藥草書《治療》中所列出的九種神奇草藥中排名第五，能夠提振能量。', image: ASSETS.herbs[HerbId.CHAMOMILE],offsetX: 25, offsetY: 28 },
+  { id: HerbId.CHAMOMILE, name: '甘菊', description: '越被踐踏則越茁壯，多麽謙卑？\n盎格魯人出版的藥草書《治療》中所列出的九種神奇草藥中排名第五，能夠提振能量。', image: ASSETS.herbs[HerbId.CHAMOMILE],offsetX: 25, offsetY: 28 },
   { id: HerbId.ACONITE, name: '烏頭', description: '雖然含有劇毒，卻可以製成解毒劑與麻醉藥。', image: ASSETS.herbs[HerbId.ACONITE],offsetX: 39, offsetY: 65 },
   { id: HerbId.ALOE, name: '蘆薈', description: '塗抹在傷處能夠舒緩傷勢，服用則會導致腹瀉。', image: ASSETS.herbs[HerbId.ALOE],offsetX: 11, offsetY: 40 },
   { id: HerbId.ERYNGIUM, name: '濱刺芹', description: '保濕護膚，服用會......', image: ASSETS.herbs[HerbId.ERYNGIUM],offsetX: 89, offsetY: 74 },

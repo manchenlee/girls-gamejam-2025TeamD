@@ -98,9 +98,9 @@ export const Interface: React.FC<Props> = ({ gameState, activeNode, onNext, onCh
       if (!currentScriptPage) return;
 
       const isFirstPage = endingPage === 0;
-      const exitBuffer = isFirstPage ? 0 : 1500; 
-      const animationTime = currentScriptPage.length * 1500; 
-      const holdTime = 1500;
+      const exitBuffer = isFirstPage ? 0 : 2000; 
+      const animationTime = currentScriptPage.length * 2000; 
+      const holdTime = 2000;
 
       const totalTime = exitBuffer + animationTime + holdTime;
 
