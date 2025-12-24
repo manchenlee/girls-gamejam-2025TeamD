@@ -1,20 +1,15 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/drive/1Ju9znCi0cF2lbgynzRaO8faxS-RUsbtx
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+# Panacea
+以”Witches don’t burn”爲主題的game jam作品。  
+「你」是一名有藥草知識的中世紀普通人，在口耳相傳之下有不少人會來拜訪你，只為求得一帖良方。這之中也有抱著其他意圖的人，你的名聲也招來了不好的事情。  
+工藝／選擇導向／劇情  
+遊玩時長：約5-10分鐘  
+共四結局  
+遊戲連結：https://tamefixation.itch.io/panacea  
+－  
+Credits  
+文本：Luny、曼成  
+程式：曼成、希希  
+2D美術：吃吃  
+3D美術：阿謙  
+－  
+附上簡單的攻略，方便大家解結局（劇透注意）：https://paste.plurk.com/show/QyUjqx7s4EXNoQJ9VaFm/
